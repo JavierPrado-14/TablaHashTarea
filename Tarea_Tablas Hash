@@ -1,0 +1,28 @@
+#include <iostream>
+#include <unordered_map>
+#include <sstream>
+
+int main() {
+    std::string code = "int suma = 0;";
+    std::unordered_map<std::string, std::pair<int, int>> hashTable;
+
+    std::istringstream iss(code);
+    std::string token;
+    int row = 0;
+
+    while (std::getline(iss, token, ' ')) {
+        if (token.empty()) {
+            continue;
+        }
+
+        hashTable[token] = std::make_pair(row, token.size() - 1);
+        row++;
+    }
+
+    // Imprimir la tabla hash
+    for (const auto& pair : hashTable) {
+        std::cout << pair.first << ": (" << pair.second.first << ", " << pair.second.second << ")" << std::endl;
+    }
+
+    return 0;
+}
